@@ -50,7 +50,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh scale=" 0.001 0.001 0.001"   filename="file://$(find robot_models)/meshes/orpheus_ac/Base_orpheus_military.stl" />
+        <box size="${base_length} ${base_width} ${base_height}"/>
       </geometry>
     </collision>
 
@@ -81,7 +81,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh scale=" 0.001 0.001 0.001" filename="file://$(find robot_models)/meshes/orpheus_ac/Mount_plate_orpheus_military_big.stl"/>
+        <box size="${base_length/1.8} ${base_width} 0.001"/>
       </geometry>
     </collision>
   <xacro:box_inertia m="1" w="${base_width}" d="${base_length}" h="0.01"/>
@@ -107,7 +107,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh scale=" 0.001 0.001 0.001" filename="file://$(find robot_models)/meshes/orpheus_ac/Mount_plate_orpheus_military_small.stl"/>
+        <box size="${base_length/3} ${base_width} 0.001"/>
       </geometry>
     </collision>
   <xacro:box_inertia m="1" w="${base_width}" d="${base_length}" h="0.01"/>
@@ -181,7 +181,9 @@
 
 
 	<gazebo reference="base_link">
-		<material>Gazebo/Tertiary</material>
+		<material name="darkgreen">
+		<color rgba="0.29 0.32 0.12 1.0"/>
+		</material>
 	</gazebo>
 	<gazebo reference="Big_mounting_plate_link">
 		<material>Gazebo/White</material>
