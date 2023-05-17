@@ -48,7 +48,7 @@
     <visual>
       <geometry>
         	<!-- <box size="${base_length} ${base_width} ${base_height}"/> -->
-        <mesh scale=" 0.001 0.001 0.001" filename="file:///home/filip/ros_workspace/src/robot_models/src/meshes/loki/Loki_base.stl"/> <!-- filename="package://orpheus_x4_description/src/meshes/Base_orpheus_x4.stl" -->
+        <mesh scale=" 0.001 0.001 0.001" filename="file://$(find robot_models)/meshes/loki/Loki_base.stl"/> <!-- filename="package://orpheus_x4_description/src/meshes/Base_orpheus_x4.stl" -->
       </geometry>
       <material name="Gray">
         <color rgba="0.85 0.87 0.88 1.0"/>
@@ -79,7 +79,7 @@
     <visual>
       <geometry>
         <!-- <box size="${base_length} ${base_width} 0.01"/> -->
-        <mesh scale=" 0.001 0.001 0.001" filename="file:///home/filip/ros_workspace/src/robot_models/meshes/loki/Loki_mount_plate.stl"/>
+        <mesh scale=" 0.001 0.001 0.001" filename="file://$(find robot_models)/meshes/loki/Loki_mount_plate.stl"/>
       </geometry>
       <material name="Gray1">
         <color rgba="0.85 0.87 0.88 1"/>
@@ -107,7 +107,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
         <geometry>
-        	<mesh scale=" 0.001 0.001 0.001"  filename="file:///home/filip/ros_workspace/src/robot_models/meshes/loki/Loki_wheel.stl"/>
+        	<mesh scale=" 0.001 0.001 0.001"  filename="file://$(find robot_models)/meshes/loki/Loki_wheel.stl"/>
         </geometry>
          <material name="Gray2">
         <color rgba="0.3 0.3 0.3 1"/>
@@ -162,11 +162,12 @@
 	
 	<link name="front_caster">
     <visual>
+    <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
       <geometry>
-        <sphere radius="${(wheel_radius+wheel_zoff-(base_height/2))}"/>
+        <mesh scale=" 0.001 0.001 0.001" filename="file://$(find robot_models)/meshes/loki/Loki_caster.stl"/>
       </geometry>
-      <material name="Cyan">
-        <color rgba="0 1.0 1.0 1.0"/>
+      <material name="Gray2">
+        <color rgba="0.3 0.3 0.3 1"/>
       </material>
     </visual>
 
@@ -191,10 +192,10 @@
 	<link name="rear_caster">
     <visual>
       <geometry>
-        <sphere radius="${(wheel_radius+wheel_zoff-(base_height/2))}"/>
+        <mesh scale=" 0.001 0.001 0.001" filename="file://$(find robot_models)/meshes/loki/Loki_caster.stl"/>
       </geometry>
-      <material name="Cyan">
-        <color rgba="0 1.0 1.0 1.0"/>
+      <material name="Gray2">
+        <color rgba="0.3 0.3 0.3 1"/>
       </material>
     </visual>
 
@@ -228,6 +229,12 @@
 	</gazebo>
 	<gazebo reference="mounting_plate_link">
 		<material>Gazebo/Gray</material>
+	</gazebo>
+	<gazebo reference="rear_caster">
+		<material>Gazebo/Grey</material>
+	</gazebo>
+	<gazebo reference="front_caster">
+		<material>Gazebo/Grey</material>
 	</gazebo>
 
 	

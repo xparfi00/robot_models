@@ -3,17 +3,17 @@
 
 	
   <!-- Konstanty robota -->
-  <xacro:property name="base_width" value="0.43"/>
-  <xacro:property name="base_length" value="0.557"/>
-  <xacro:property name="base_height" value="0.119"/>
+  <xacro:property name="base_width" value="0.35"/>
+  <xacro:property name="base_length" value="0.40"/>
+  <xacro:property name="base_height" value="0.23"/>
 
-  <xacro:property name="wheel_radius" value="0.20"/>
-  <xacro:property name="wheel_width" value="0.06"/>
-  <xacro:property name="wheel_ygap" value="0.042"/>
-  <xacro:property name="wheel_zoff" value="0.000"/>
-  <xacro:property name="wheel_xoff" value="0.223"/>
+  <xacro:property name="wheel_radius" value="0.0475"/>
+  <xacro:property name="wheel_width" value="0.03"/>
+  <xacro:property name="wheel_ygap" value="0.015"/>
+  <xacro:property name="wheel_zoff" value="0.135"/>
+  <xacro:property name="wheel_xoff" value="0.0"/>
 
-
+  <xacro:property name="caster_xoff" value="0.14"/>
 
 
 <!-- Define intertial property macros  -->
@@ -33,6 +33,13 @@
       <inertia ixx="${(m/12) * (3*r*r + h*h)}" ixy = "0" ixz = "0" iyy="${(m/12) * (3*r*r + h*h)}" iyz = "0" izz="${(m/2) * (r*r)}"/>
     </inertial>
   </xacro:macro>
+  
+ <xacro:macro name="sphere_inertia" params="m r">
+    <inertial>
+      <mass value="${m}"/>
+      <inertia ixx="${(2/5) * m * (r*r)}" ixy="0.0" ixz="0.0" iyy="${(2/5) * m * (r*r)}" iyz="0.0" izz="${(2/5) * m * (r*r)}"/>
+    </inertial>
+  </xacro:macro>
 
 
 <!-- Telo robota -->
@@ -41,10 +48,10 @@
     <visual>
       <geometry>
         	<!-- <box size="${base_length} ${base_width} ${base_height}"/> -->
-        <mesh scale=" 0.001 0.001 0.001" filename="file://$(find robot_models)/meshes/orpheus_x4/Base_orpheus_x4.stl"/> <!-- filename="package://orpheus_x4_description/src/meshes/Base_orpheus_x4.stl" -->
+        <mesh scale=" 0.001 0.001 0.001" filename="file://$(find robot_models)/meshes/loki/Loki_base.stl"/> <!-- filename="package://orpheus_x4_description/src/meshes/Base_orpheus_x4.stl" -->
       </geometry>
-      <material name="Black">
-        <color rgba="0.05 0.05 0.05 1.0"/>
+      <material name="Gray">
+        <color rgba="0.85 0.87 0.88 1.0"/>
       </material>
     </visual>
     <collision>
@@ -72,10 +79,10 @@
     <visual>
       <geometry>
         <!-- <box size="${base_length} ${base_width} 0.01"/> -->
-        <mesh scale=" 0.001 0.001 0.001" filename="file://$(find robot_models)/meshes/orpheus_x4/Mount_plate_orpheus_x4.stl"/>
+        <mesh scale=" 0.001 0.001 0.001" filename="file://$(find robot_models)/meshes/loki/Loki_mount_plate.stl"/>
       </geometry>
-      <material name="Silver">
-        <color rgba="0.8 0.8 0.8 1"/>
+      <material name="Gray1">
+        <color rgba="0.85 0.87 0.88 1"/>
       </material>
     </visual>
     <collision>
@@ -92,32 +99,6 @@
     <origin xyz="0.0 0.0 ${(base_height/2)}" rpy="0 0 0"/>
   </joint>
   
-  <!-- Platforma na prislusenstvi -->
-  
-  <link name="platform_link">
-    <visual>
-      <geometry>
-        <!-- <box size="${base_length} ${base_width} 0.01"/> -->
-        <mesh scale=" 0.001 0.001 0.001" filename="file://$(find robot_models)/meshes/orpheus_x4/Orpheus_x4_platform.stl"/>
-      </geometry>
-      <material name="Silver">
-        <color rgba="0.8 0.8 0.8 1"/>
-      </material>
-    </visual>
-    <collision>
-      <geometry>
-        <box size="0.05 0.08 0.465"/>
-      </geometry>
-    </collision>
-  <xacro:box_inertia m="1" w="${base_width}" d="${base_length}" h="0.01"/>
-  </link> 
-  
-  <joint name="platform_joint" type="fixed">
-    <parent link="base_link"/>
-    <child link="platform_link"/>
-    <origin xyz="${(-base_length/2)-0.020} 0.0 ${(wheel_radius/2 + base_height/2 + 0.018)}" rpy="0 0 0"/>
-  </joint>
-  
   
 <!-- Kola -->
     
@@ -126,10 +107,10 @@
       <visual>
         <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
         <geometry>
-        	<mesh scale=" 0.001 0.001 0.001"  filename="file://$(find robot_models)/meshes/orpheus_x4/Wheel_v3.stl"/>
+        	<mesh scale=" 0.001 0.001 0.001"  filename="file://$(find robot_models)/meshes/loki/Loki_wheel.stl"/>
         </geometry>
-        <material name="Black">
-		<color rgba="0.15 0.15 0.15 1.0"/>
+         <material name="Gray2">
+        <color rgba="0.3 0.3 0.3 1"/>
         </material>
       </visual>
       
@@ -169,34 +150,86 @@
 			</joint>
 		</transmission>
     
-    
+  
+
   </xacro:macro>
   
   <!-- Nastaveni pozic jednotlivych kol -->
-  <xacro:wheel prefix="drivewhl_rl" x_reflect="-1" y_reflect="1" />
-  <xacro:wheel prefix="drivewhl_rr" x_reflect="-1" y_reflect="-1" />
-  <xacro:wheel prefix="drivewhl_fl" x_reflect="1" y_reflect="1" />
-  <xacro:wheel prefix="drivewhl_fr" x_reflect="1" y_reflect="-1" />
+  <xacro:wheel prefix="drivewhl_l" x_reflect="-1" y_reflect="1" />
+  <xacro:wheel prefix="drivewhl_r" x_reflect="-1" y_reflect="-1" />
 
-  <!-- Barvy v Gazebu -->
+	<!-- Caster Wheels -->
+	
+	<link name="front_caster">
+    <visual>
+      <geometry>
+        <sphere radius="${(wheel_radius+wheel_zoff-(base_height/2))}"/>
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="${(wheel_radius+wheel_zoff-(base_height/2))}"/>
+      </geometry>
+    </collision>
+
+    <xacro:sphere_inertia m="0.5" r="${(wheel_radius+wheel_zoff-(base_height/2))}"/>
+  </link>
+
+  <joint name="front_caster_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="front_caster"/>
+    <origin xyz="${caster_xoff} 0.0 ${-(base_height/2)}" rpy="0 0 0"/>
+  </joint>
+
+
+
+	<link name="rear_caster">
+    <visual>
+      <geometry>
+        <sphere radius="${(wheel_radius+wheel_zoff-(base_height/2))}"/>
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="${(wheel_radius+wheel_zoff-(base_height/2))}"/>
+      </geometry>
+    </collision>
+
+    <xacro:sphere_inertia m="0.5" r="${(wheel_radius+wheel_zoff-(base_height/2))}"/>
+  </link>
+
+  <joint name="rear_caster_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="rear_caster"/>
+    <origin xyz="${-caster_xoff} 0.0 ${-(base_height/2)}" rpy="0 0 0"/>
+  </joint>
+
+
+
+
 	<gazebo reference="base_link">
-		<material>Gazebo/DarkGrey</material>
+		<material>Gazebo/Gray</material>
+	</gazebo>
+	<gazebo reference="drivewhl_l_link">
+		<material>Gazebo/Gray</material>
+	</gazebo>
+	<gazebo reference="drivewhl_r_link">
+		<material>Gazebo/Gray</material>
 	</gazebo>
 	<gazebo reference="mounting_plate_link">
-		<material>Gazebo/White</material>
+		<material>Gazebo/Gray</material>
 	</gazebo>
-	<gazebo reference="drivewhl_fl_link">
-		<material>Gazebo/DarkGrey</material>
-	</gazebo>
-	<gazebo reference="drivewhl_fr_link">
-		<material>Gazebo/DarkGrey</material>
-	</gazebo>
-	<gazebo reference="drivewhl_rl_link">
-		<material>Gazebo/DarkGrey</material>
-	</gazebo>
-	<gazebo reference="drivewhl_rr_link">
-		<material>Gazebo/DarkGrey</material>
-	</gazebo>
+
 	
 	
 	<gazebo>
@@ -205,18 +238,16 @@
       			<namespace>/demo</namespace>
     		</ros>
 	<!-- Pocet paru kol -->
-    		<num_wheel_pairs>2</num_wheel_pairs>
+    		<num_wheel_pairs>1</num_wheel_pairs>
     
 	<!-- Kola -->
-    		<left_joint>drivewhl_fl_joint</left_joint>
-    		<right_joint>drivewhl_fr_joint</right_joint>
-    		<left_joint>drivewhl_rl_joint</left_joint>
-    		<right_joint>drivewhl_rr_joint</right_joint>
+    		<left_joint>drivewhl_l_joint</left_joint>
+    		<right_joint>drivewhl_r_joint</right_joint>
     
 
 	<!-- kinematika -->
-    		<wheel_separation>0.44</wheel_separation>
-    		<wheel_diameter>0.4</wheel_diameter>
+    		<wheel_separation>0.35</wheel_separation>
+    		<wheel_diameter>0.095</wheel_diameter>
 
 
 	<!-- limity -->

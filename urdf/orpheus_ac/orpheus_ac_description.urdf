@@ -42,10 +42,10 @@
     <visual>
       <geometry>
         	<!-- <box size="${base_length} ${base_width} ${base_height}"/> -->
-        <mesh scale=" 0.001 0.001 0.001"   filename="file:///home/filip/ros_workspace/src/robot_models/meshes/orpheus_ac/Base_orpheus_military.stl" /> <!--package://orpheus_x4_description/src/meshes/Base_orpheus_military.stl "-->
+        <mesh scale=" 0.001 0.001 0.001"   filename="file://$(find robot_models)/meshes/orpheus_ac/Base_orpheus_military.stl" /> <!--package://orpheus_x4_description/src/meshes/Base_orpheus_military.stl "-->
       </geometry>
       <material name="Green">
-        <color rgba="0 1 0 1.0"/>
+        <color rgba="0.26 0.35 0 1.0"/>
       </material>
     </visual>
     <collision>
@@ -73,7 +73,7 @@
     <visual>
       <geometry>
         <!-- <box size="${base_length} ${base_width} 0.01"/> -->
-        <mesh scale=" 0.001 0.001 0.001" filename="file:///home/filip/ros_workspace/src/robot_models/meshes/orpheus_ac/Mount_plate_orpheus_military_big.stl"/>
+        <mesh scale=" 0.001 0.001 0.001" filename="file://$(find robot_models)/meshes/orpheus_ac/Mount_plate_orpheus_military_big.stl"/>
       </geometry>
       <material name="Silver">
         <color rgba="0.8 0.8 0.8 1"/>
@@ -99,7 +99,7 @@
     <visual>
       <geometry>
         <!-- <box size="${base_length} ${base_width} 0.01"/> -->
-        <mesh scale=" 0.001 0.001 0.001" filename="file:///home/filip/ros_workspace/src/robot_models/meshes/orpheus_ac/Mount_plate_orpheus_military_small.stl"/>
+        <mesh scale=" 0.001 0.001 0.001" filename="file://$(find robot_models)/meshes/orpheus_ac/Mount_plate_orpheus_military_small.stl"/>
       </geometry>
       <material name="Silver">
         <color rgba="0.8 0.8 0.8 1"/>
@@ -127,10 +127,10 @@
       <visual>
         <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
         <geometry>
-        	<mesh scale=" 0.001 0.001 0.001"  filename="file:///home/filip/ros_workspace/src/robot_models/meshes/orpheus_ac/Wheel_v3.stl"/>
+        	<mesh scale=" 0.001 0.001 0.001"  filename="file://$(find robot_models)/meshes/orpheus_ac/Wheel_v3.stl"/>
         </geometry>
         <material name="Black">
-		<color rgba="0 0 0 1.0"/>
+		<color rgba="0.15 0.15 0.15 1.0"/>
         </material>
       </visual>
       
