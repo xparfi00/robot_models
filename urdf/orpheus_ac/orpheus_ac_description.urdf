@@ -75,8 +75,8 @@
         <!-- <box size="${base_length} ${base_width} 0.01"/> -->
         <mesh scale=" 0.001 0.001 0.001" filename="file://$(find robot_models)/meshes/orpheus_ac/Mount_plate_orpheus_military_big.stl"/>
       </geometry>
-      <material name="Silver">
-        <color rgba="0.8 0.8 0.8 1"/>
+      <material name="Green">
+        <color rgba="0.29 0.32 0.12 1.0"/>
       </material>
     </visual>
     <collision>
@@ -101,8 +101,8 @@
         <!-- <box size="${base_length} ${base_width} 0.01"/> -->
         <mesh scale=" 0.001 0.001 0.001" filename="file://$(find robot_models)/meshes/orpheus_ac/Mount_plate_orpheus_military_small.stl"/>
       </geometry>
-      <material name="Silver">
-        <color rgba="0.8 0.8 0.8 1"/>
+      <material name="Green">
+        <color rgba="0.29 0.32 0.12 1.0"/>
       </material>
     </visual>
     <collision>
@@ -181,13 +181,13 @@
 
 
 	<gazebo reference="base_link">
-		<material>Gazebo/Tertiary</material>
+		<material>Gazebo/Residential</material>
 	</gazebo>
 	<gazebo reference="Big_mounting_plate_link">
-		<material>Gazebo/White</material>
+		<material>Gazebo/Residential</material>
 	</gazebo>
 	<gazebo reference="Small_mounting_plate_link">
-		<material>Gazebo/White</material>
+		<material>Gazebo/Residential</material>
 	</gazebo>
 	<gazebo reference="drivewhl_fl_link">
 		<material>Gazebo/DarkGray</material>
