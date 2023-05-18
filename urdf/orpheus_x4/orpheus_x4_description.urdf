@@ -126,7 +126,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
         <geometry>
-        	<mesh scale=" 0.001 0.001 0.001"  filename="file://$(find robot_models)/meshes/orpheus_x4/Wheel_v3.stl"/>
+        	<mesh scale=" 0.001 0.001 0.001"  filename="file://$(find robot_models)/meshes/orpheus_x4/Wheel_v3_detailed.stl"/>
         </geometry>
         <material name="Black">
 		<color rgba="0.15 0.15 0.15 1.0"/>

@@ -6,8 +6,8 @@ import os
 def generate_launch_description():
     pkg_share = launch_ros.substitutions.FindPackageShare(package='robot_models').find('robot_models')
     #default_model_path = os.path.join(pkg_share, 'urdf/loki/loki_description.urdf')
-    #default_model_path = os.path.join(pkg_share, 'urdf/orpheus_x4/orpheus_x4_description.urdf')
-    default_model_path = os.path.join(pkg_share, 'urdf/orpheus_ac/orpheus_ac_description.urdf')
+    default_model_path = os.path.join(pkg_share, 'urdf/orpheus_x4/orpheus_x4_description.urdf')
+    #default_model_path = os.path.join(pkg_share, 'urdf/orpheus_ac/orpheus_ac_description.urdf')
     default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf_config.rviz')
 
     robot_state_publisher_node = launch_ros.actions.Node(
